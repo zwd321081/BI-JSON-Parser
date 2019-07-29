@@ -1,4 +1,5 @@
 import TokenType from "./TokenType";
+import Token from "./Token"
 
 class Lexer{
     constructor(input){
@@ -8,7 +9,7 @@ class Lexer{
     }
     /**获取下一个字符 */
     consume(){
-        if(this.pos < this.input.length()-1){
+        if(this.pos < this.input.length-1){
             this.pos++;
             this.currentChar = this.input[this.pos];
         }else{
@@ -28,8 +29,27 @@ class Lexer{
     getCurrentChar(){
         return this.currentChar;
     }
+    skipWhiteSpace(){
+        const re = /\s/gi;
+        while(re.test(this.currentChar)){
+            this.consume();
+        }
+    }
 
-    getNextToken(){}
+    getNextToken(){
+
+        while(this.currentChar != TokenType.EOF){
+            this.skipWhiteSpace();
+            switch(this.currentChar){
+                case "{":
+                    this.consume();
+                    return new Token(TokenType.OpenBrace,"{");
+                default:
+                    console.error(`${this.currentChar} is not a valid type`)
+                    
+            }
+        }
+    }
 }
 
 export default Lexer;

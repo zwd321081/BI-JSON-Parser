@@ -1,5 +1,5 @@
 import Lexer from "../src/Lexer"
-test('get simple Token',()=>{
+test('get first Token',()=>{
     const input = `{
         "page": "dailysongrecommend|userfm", // 日推|私人FM
         "resource": "song", // 歌曲
@@ -10,6 +10,7 @@ test('get simple Token',()=>{
         "reason_type": "fixed" // 不感兴趣理由类型，固定
       }`
     let lexer = new Lexer(input);
-    debugger;
-    expect(lexer.getNextToken()).toBe('{');
+    // debugger;
+    let token = lexer.getNextToken();
+    expect(token.type).toBe('OpenBrace');
 })

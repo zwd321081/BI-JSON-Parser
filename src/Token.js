@@ -6,3 +6,5 @@ class Token{
         this.column = column;
     }
 }
+
+export default Token;
