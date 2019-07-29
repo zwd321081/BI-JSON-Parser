@@ -23,7 +23,7 @@
     "BOOLEN":"BOOLEN",
     "NUMBER":"NUMBER",
     "Comma":",",
-    "EOF":"EOF",//end of file
+    "EOFILE":"EOFILE",//end of file
  }
 
  export default TokenType;

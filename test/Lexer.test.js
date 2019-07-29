@@ -10,7 +10,10 @@ test('get first Token',()=>{
         "reason_type": "fixed" // 不感兴趣理由类型，固定
       }`
     let lexer = new Lexer(input);
-    // debugger;
+    debugger;
     let token = lexer.getNextToken();
     expect(token.type).toBe('OpenBrace');
+     token = lexer.getNextToken();
+    expect(token.value).toBe('page');
+    expect(token.type).toBe('StringLiteral');
 })

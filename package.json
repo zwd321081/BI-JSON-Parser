@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test:debug":"babel-node --inspect-brk node_modules/.bin/jest --runInBand"
+    "test:debug": "babel-node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,6 @@
     "@babel/node": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "jest": "^24.8.0"
-  }
+  },
+  "dependencies": {}
 }
