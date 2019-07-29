@@ -10,5 +10,6 @@ test('get simple Token',()=>{
         "reason_type": "fixed" // 不感兴趣理由类型，固定
       }`
     let lexer = new Lexer(input);
+    debugger;
     expect(lexer.getNextToken()).toBe('{');
 })

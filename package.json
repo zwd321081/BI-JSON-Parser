@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "debug": "babel-node --inspect-brk src/Test.js",
-    "test": "jest"
+    "test": "jest",
+    "test:debug":"babel-node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "repository": {
     "type": "git",
