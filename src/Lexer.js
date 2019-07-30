@@ -48,6 +48,8 @@ class Lexer{
         return re.test(char)
     }
 
+    
+
     getStringToken(){
         let buffer = '';
         this.match(TokenType.QUOTE);
@@ -59,8 +61,22 @@ class Lexer{
             this.match(TokenType.QUOTE);
             return new Token(TokenType.StringLiteral,buffer)
         }
-        
+    }
 
+    isNumber(char){
+        const re=/\d/g;
+        return re.test(char);
+    }
+
+    getNumberToken(){
+        let buffer=''
+        while(this.isNumber(this.currentChar)){
+            buffer+= this.currentChar;
+            this.consume();
+        }
+        if(buffer){
+            return new Token(TokenType.NUMBER,buffer)
+        }
     }
 
     getNextToken(){
@@ -79,9 +95,12 @@ class Lexer{
                     return this.getStringToken();
                 case ":":
                     this.consume();
-                    return new Token(TokenType.COLON,TokenType.COLON)
+                    return new Token(TokenType.COLON,TokenType.COLON);
                 default:
-                    console.error(`${this.currentChar} is not a valid type`)
+                      if(this.isNumber(this.currentChar)){
+                        return this.getNumberToken();
+                      }else 
+                        console.error(`${this.currentChar} is not a valid type`)
                     
             }
         }

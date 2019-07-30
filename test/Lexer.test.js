@@ -4,7 +4,6 @@ test('get single string token',()=>{
         "resource": "song"
       }`
     let lexer = new Lexer(input);
-    debugger;
     let token = lexer.getNextToken();
     expect(token.type).toBe('{');
      token = lexer.getNextToken();
@@ -17,6 +16,26 @@ test('get single string token',()=>{
     expect(token.type).toBe('StringLiteral');
     token = lexer.getNextToken();
     expect(token.type).toBe('}');
+})
+
+test('get single number token',()=>{
+  const input = `{
+      "target": 111
+    }`
+  let lexer = new Lexer(input);
+  debugger;
+  let token = lexer.getNextToken();
+  expect(token.type).toBe('{');
+   token = lexer.getNextToken();
+  expect(token.value).toBe('target');
+  expect(token.type).toBe('StringLiteral');
+  token = lexer.getNextToken();
+  expect(token.type).toBe(':');
+  token = lexer.getNextToken();
+  expect(token.type).toBe('NUMBER');
+  expect(token.value).toBe('111');
+  token = lexer.getNextToken();
+  expect(token.type).toBe('}');
 })
 
 // test('get first Token',()=>{
