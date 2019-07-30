@@ -71,9 +71,15 @@ class Lexer{
             switch(this.currentChar){
                 case "{":
                     this.consume();
-                    return new Token(TokenType.OpenBrace,"{");
+                    return new Token(TokenType.OpenBrace,TokenType.OpenBrace);
+                 case "}":
+                    this.consume();
+                    return new Token(TokenType.CloseBrace,TokenType.CloseBrace);
                 case '"':
                     return this.getStringToken();
+                case ":":
+                    this.consume();
+                    return new Token(TokenType.COLON,TokenType.COLON)
                 default:
                     console.error(`${this.currentChar} is not a valid type`)
                     
