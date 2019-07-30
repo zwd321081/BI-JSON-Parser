@@ -1,4 +1,4 @@
-import TokenType from "./TokenType";
+import {TokenType,KeyWords }from "./TokenType";
 import Token from "./Token"
 
 class Lexer{
@@ -58,6 +58,7 @@ class Lexer{
             this.consume();
         }
         if(buffer){
+            buffer='"'+buffer+'"'
             this.match(TokenType.QUOTE);
             return new Token(TokenType.StringLiteral,buffer)
         }
@@ -78,10 +79,21 @@ class Lexer{
             return new Token(TokenType.NUMBER,buffer)
         }
     }
+    getKeyWordToken(){
+        let buffer = '';
+        while(this.isLetter(this.currentChar)){
+            buffer += this.currentChar;
+            this.consume();
+        }
+        let isKeyWord = KeyWords[buffer];
+        if(isKeyWord){
+            return new Token(isKeyWord,isKeyWord)
+        }else{
+            console.error(`${buffer} is not an valid token`)
+        }
+    }
 
     getNextToken(){
-
-       
         if(this.currentChar != TokenType.EOFILE){
             this.skipWhiteSpace();
             switch(this.currentChar){
@@ -99,8 +111,12 @@ class Lexer{
                 default:
                       if(this.isNumber(this.currentChar)){
                         return this.getNumberToken();
-                      }else 
+                      }else if (this.isLetter(this.currentChar)){
+                        return this.getKeyWordToken();
+                      }else {
                         console.error(`${this.currentChar} is not a valid type`)
+                      }
+                        
                     
             }
         }

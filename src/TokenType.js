@@ -20,10 +20,14 @@
     "SingleLineComment":"//",
     "COLON":":",
     "QUOTE":'"',
-    "BOOLEN":"BOOLEN",
     "NUMBER":"NUMBER",
     "Comma":",",
     "EOFILE":"EOFILE",//end of file
  }
 
- export default TokenType;
+ const KeyWords={
+    "true":"true",
+    "false":"false"
+ }
+
+ export  {TokenType,KeyWords};

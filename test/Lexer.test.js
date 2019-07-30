@@ -7,12 +7,12 @@ test('get single string token',()=>{
     let token = lexer.getNextToken();
     expect(token.type).toBe('{');
      token = lexer.getNextToken();
-    expect(token.value).toBe('resource');
+    expect(token.value).toBe(`"resource"`);
     expect(token.type).toBe('StringLiteral');
     token = lexer.getNextToken();
     expect(token.type).toBe(':');
     token = lexer.getNextToken();
-    expect(token.value).toBe('song');
+    expect(token.value).toBe(`"song"`);
     expect(token.type).toBe('StringLiteral');
     token = lexer.getNextToken();
     expect(token.type).toBe('}');
@@ -27,13 +27,33 @@ test('get single number token',()=>{
   let token = lexer.getNextToken();
   expect(token.type).toBe('{');
    token = lexer.getNextToken();
-  expect(token.value).toBe('target');
+  expect(token.value).toBe(`"target"`);
   expect(token.type).toBe('StringLiteral');
   token = lexer.getNextToken();
   expect(token.type).toBe(':');
   token = lexer.getNextToken();
   expect(token.type).toBe('NUMBER');
   expect(token.value).toBe('111');
+  token = lexer.getNextToken();
+  expect(token.type).toBe('}');
+})
+
+test('get single boolean token',()=>{
+  const input = `{
+      "resourceid": true
+    }`
+  let lexer = new Lexer(input);
+  debugger;
+  let token = lexer.getNextToken();
+  expect(token.type).toBe(`{`);
+   token = lexer.getNextToken();
+  expect(token.value).toBe(`"resourceid"`);
+  expect(token.type).toBe('StringLiteral');
+  token = lexer.getNextToken();
+  expect(token.type).toBe(':');
+  token = lexer.getNextToken();
+  expect(token.type).toBe('true');
+  expect(token.value).toBe('true');
   token = lexer.getNextToken();
   expect(token.type).toBe('}');
 })
