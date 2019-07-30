@@ -6,6 +6,9 @@ class Lexer{
         this.input = input;
         this.pos =0;
         this.currentChar = this.input[this.pos];
+        this.tokens=[];
+        this.tokenIndex=0; //为了取得下一个token用
+        this.lex();
     }
     /**获取下一个字符 */
     consume(){
@@ -13,7 +16,7 @@ class Lexer{
             this.pos++;
             this.currentChar = this.input[this.pos];
         }else{
-            this.currentChar = TokenType.EOF;
+            this.currentChar = TokenType.EOFILE;
         }
     }
     isEnd(){
@@ -53,14 +56,21 @@ class Lexer{
     getStringToken(){
         let buffer = '';
         this.match(TokenType.QUOTE);
-        while(this.isLetter(this.currentChar)){
+        while(this.isLetter(this.currentChar)|| this.currentChar == TokenType.BitOr){
             buffer += this.currentChar;
             this.consume();
         }
         if(buffer){
-            buffer='"'+buffer+'"'
+            let bitStrings = buffer.split(TokenType.BitOr);
+            let bitNumber = bitStrings.length-1;
+            bitStrings.forEach((item,index)=>{
+                let finalStr = '"'+item+'"';
+                 this.tokens.push(new Token(TokenType.StringLiteral,finalStr)) ;
+                if(index<bitNumber){
+                    this.tokens.push(new Token(TokenType.BitOr,TokenType.BitOr))
+                }
+            })
             this.match(TokenType.QUOTE);
-            return new Token(TokenType.StringLiteral,buffer)
         }
     }
 
@@ -93,32 +103,48 @@ class Lexer{
         }
     }
 
-    getNextToken(){
-        if(this.currentChar != TokenType.EOFILE){
+    //获取所有的token;
+    lex(){
+        while(this.currentChar&&this.currentChar != TokenType.EOFILE){
             this.skipWhiteSpace();
+            let token =''
             switch(this.currentChar){
                 case "{":
                     this.consume();
-                    return new Token(TokenType.OpenBrace,TokenType.OpenBrace);
+                    token= new Token(TokenType.OpenBrace,TokenType.OpenBrace);
+                    break;
                  case "}":
                     this.consume();
-                    return new Token(TokenType.CloseBrace,TokenType.CloseBrace);
+                    token= new Token(TokenType.CloseBrace,TokenType.CloseBrace);
+                    break;
                 case '"':
-                    return this.getStringToken();
+                     token= this.getStringToken();
+                     break;
                 case ":":
                     this.consume();
-                    return new Token(TokenType.COLON,TokenType.COLON);
+                    token= new Token(TokenType.COLON,TokenType.COLON);
+                    break;
                 default:
                       if(this.isNumber(this.currentChar)){
-                        return this.getNumberToken();
+                        token= this.getNumberToken();
                       }else if (this.isLetter(this.currentChar)){
-                        return this.getKeyWordToken();
+                        token= this.getKeyWordToken();
                       }else {
                         console.error(`${this.currentChar} is not a valid type`)
                       }
                         
                     
             }
+            if(token)
+            this.tokens.push(token)
+        }
+    }
+
+    getNextToken(){
+        if(this.tokenIndex <= this.tokens.length-1){
+            return this.tokens[this.tokenIndex++];
+        }else{
+            console.error(`no token left`)
         }
     }
 }

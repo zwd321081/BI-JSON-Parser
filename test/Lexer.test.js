@@ -1,3 +1,13 @@
+//   const input = `{
+//       "page": "dailysongrecommend|userfm", // 日推|私人FM
+//       "resource": "song", // 歌曲
+//       "resourceid": true, // 歌曲id，如123
+//       "target": 111, // 不感兴趣
+//       "targetid": "button", // 点击按钮
+//       "reason": "", // 不感兴趣理由，如推荐重复
+//       "reason_type": "fixed" // 不感兴趣理由类型，固定
+//     }`
+
 import Lexer from "../src/Lexer"
 test('get single string token',()=>{
     const input = `{
@@ -43,7 +53,6 @@ test('get single boolean token',()=>{
       "resourceid": true
     }`
   let lexer = new Lexer(input);
-  debugger;
   let token = lexer.getNextToken();
   expect(token.type).toBe(`{`);
    token = lexer.getNextToken();
@@ -58,21 +67,25 @@ test('get single boolean token',()=>{
   expect(token.type).toBe('}');
 })
 
-// test('get first Token',()=>{
-//   const input = `{
-//       "page": "dailysongrecommend|userfm", // 日推|私人FM
-//       "resource": "song", // 歌曲
-//       "resourceid": true, // 歌曲id，如123
-//       "target": 111, // 不感兴趣
-//       "targetid": "button", // 点击按钮
-//       "reason": "", // 不感兴趣理由，如推荐重复
-//       "reason_type": "fixed" // 不感兴趣理由类型，固定
-//     }`
-//   let lexer = new Lexer(input);
-//   debugger;
-//   let token = lexer.getNextToken();
-//   expect(token.type).toBe('OpenBrace');
-//    token = lexer.getNextToken();
-//   expect(token.value).toBe('page');
-//   expect(token.type).toBe('StringLiteral');
-// })
+test('custom bit string token',()=>{
+  const input = `{
+      "page": "dailysongrecommend|userfm"
+    }`
+    debugger;
+  let lexer = new Lexer(input);
+  let token = lexer.getNextToken();
+  expect(token.type).toBe(`{`);
+   token = lexer.getNextToken();
+  expect(token.value).toBe(`"page"`);
+  expect(token.type).toBe('StringLiteral');
+  token = lexer.getNextToken();
+  expect(token.type).toBe(':');
+  token = lexer.getNextToken();
+  expect(token.value).toBe(`"dailysongrecommend"`);
+  expect(token.type).toBe('StringLiteral');
+  token = lexer.getNextToken();
+  expect(token.type).toBe('|');
+  token = lexer.getNextToken();
+  expect(token.value).toBe(`"userfm"`);
+  expect(token.type).toBe('StringLiteral');
+})
