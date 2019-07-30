@@ -33,7 +33,6 @@ test('get single number token',()=>{
       "target": 111
     }`
   let lexer = new Lexer(input);
-  debugger;
   let token = lexer.getNextToken();
   expect(token.type).toBe('{');
    token = lexer.getNextToken();
@@ -71,7 +70,6 @@ test('custom bit string token',()=>{
   const input = `{
       "page": "dailysongrecommend|userfm"
     }`
-    debugger;
   let lexer = new Lexer(input);
   let token = lexer.getNextToken();
   expect(token.type).toBe(`{`);
