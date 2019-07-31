@@ -7,6 +7,12 @@
     "test": "jest",
     "test:debug": "babel-node --inspect-brk node_modules/.bin/jest --runInBand"
   },
+  "jest": {
+    "testEnvironment": "node",
+    "roots": [
+      "test"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xff1874/BI-JSON-Parser.git"
