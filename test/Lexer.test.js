@@ -105,8 +105,9 @@ test('get single string token with comment',()=>{
   expect(token.value).toBe(`"song"`);
   token = lexer.getNextToken();
   expect(token.value).toBe(",");
-  // expect(token.type).toBe(TokenType.SingleLineComment);
-  // expect(token.value).toBe("日推|私人FM,歌曲id，如123");
+  token = lexer.getNextToken();
+  expect(token.type).toBe(TokenType.SingleLineComment);
+  expect(token.value).toBe("日推|私人FM,歌曲id，如123");
   token = lexer.getNextToken();
   expect(token.type).toBe('}');
 

@@ -109,13 +109,21 @@ class Lexer {
     }
   }
 
-  skipComment() {
+  getCommentToken() {
     //简单处理两个/
     this.match(TokenType.SingleSlash);
     this.match(TokenType.SingleSlash);
 
+    let buffer = "";
+
     while (!this.isNewLine(this.currentChar) && !this.isEnd()) {
+      buffer += this.currentChar;
       this.consume();
+    }
+
+    if (buffer) {
+      buffer = buffer.trim();
+      return new Token(TokenType.SingleLineComment, buffer);
     }
   }
 
@@ -145,7 +153,7 @@ class Lexer {
           token = new Token(TokenType.COMMA, TokenType.COMMA);
           break;
         case "/":
-          this.skipComment();
+          token = this.getCommentToken();
           break;
         default:
           if (this.isNumber(this.currentChar)) {

@@ -18,6 +18,7 @@ const TokenType = {
   SingleSlash: "/",
   COLON: ":",
   QUOTE: '"',
+  SingleLineComment: "//",
   NUMBER: "NUMBER",
   COMMA: ",",
   EOFILE: "EOFILE" //end of file
