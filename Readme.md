@@ -28,7 +28,7 @@ obj
     ;
 
 pair
-    String: value
+    String: value(,comment)*
 
 BITSTRING
     : String(|String)*
