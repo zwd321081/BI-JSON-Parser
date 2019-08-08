@@ -19,7 +19,6 @@ value
     : STRING
     | NUMBER
     | obj
-    | array
     | 'true'
     | 'false'
     ;
@@ -27,5 +26,9 @@ value
 obj 
     : "{" pair (,pair)* "}"
     ;
+
+pair
+    String: value
+
 
 ```

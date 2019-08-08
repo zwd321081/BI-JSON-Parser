@@ -15,7 +15,6 @@ const TokenType = {
   CloseBrace: "}", //右括号
   StringLiteral: "StringLiteral", //字符串类型
   BitOr: "|",
-  SingleLineComment: "//",
   SingleSlash: "/",
   COLON: ":",
   QUOTE: '"',
