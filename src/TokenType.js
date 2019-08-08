@@ -10,8 +10,6 @@
 }
  */
 
-//token 参考https://github.com/antlr/grammars-v4/blob/master/javascript/JavaScriptLexer.g4
-//https://github.com/vtrushin/json-to-ast/blob/master/lib/tokenize.js
 const TokenType = {
   OpenBrace: "{", //左括号
   CloseBrace: "}", //右括号
