@@ -9,6 +9,7 @@
 //     }`
 
 import Lexer from "../src/Lexer"
+import { TokenType } from "../src/TokenType";
 test('get single string token',()=>{
     const input = `{
         "resource": "song"
@@ -87,3 +88,30 @@ test('custom bit string token',()=>{
   expect(token.value).toBe(`"userfm"`);
   expect(token.type).toBe('StringLiteral');
 })
+
+test('get single string token with comment',()=>{
+  const input = `{
+      "resource": "song", // 日推|私人FM
+    }`
+  let lexer = new Lexer(input);
+  let token = lexer.getNextToken();
+  expect(token.type).toBe('{');
+   token = lexer.getNextToken();
+  expect(token.value).toBe(`"resource"`);
+  expect(token.type).toBe('StringLiteral');
+  token = lexer.getNextToken();
+  expect(token.type).toBe(':');
+  token = lexer.getNextToken();
+  expect(token.value).toBe(`"song"`);
+  debugger;
+  token = lexer.getNextToken();
+  expect(token.value).toBe(",");
+  token = lexer.getNextToken();
+  debugger;
+  expect(token.type).toBe(TokenType.SingleLineComment);
+  expect(token.value).toBe("日推|私人FM");
+  token = lexer.getNextToken();
+  expect(token.type).toBe('}');
+
+})
+

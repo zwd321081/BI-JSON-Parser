@@ -10,24 +10,25 @@
 }
  */
 
- //token 参考https://github.com/antlr/grammars-v4/blob/master/javascript/JavaScriptLexer.g4
+//token 参考https://github.com/antlr/grammars-v4/blob/master/javascript/JavaScriptLexer.g4
 //https://github.com/vtrushin/json-to-ast/blob/master/lib/tokenize.js
- const TokenType ={
-    "OpenBrace":"{",//左括号
-    "CloseBrace":"}",//右括号
-    "StringLiteral":"StringLiteral", //字符串类型
-    "BitOr":"|",
-    "SingleLineComment":"//",
-    "COLON":":",
-    "QUOTE":'"',
-    "NUMBER":"NUMBER",
-    "Comma":",",
-    "EOFILE":"EOFILE",//end of file
- }
+const TokenType = {
+  OpenBrace: "{", //左括号
+  CloseBrace: "}", //右括号
+  StringLiteral: "StringLiteral", //字符串类型
+  BitOr: "|",
+  SingleLineComment: "//",
+  SingleSlash: "/",
+  COLON: ":",
+  QUOTE: '"',
+  NUMBER: "NUMBER",
+  COMMA: ",",
+  EOFILE: "EOFILE" //end of file
+};
 
- const KeyWords={
-    "true":"true",
-    "false":"false"
- }
+const KeyWords = {
+  true: "true",
+  false: "false"
+};
 
- export  {TokenType,KeyWords};
+export { TokenType, KeyWords };
