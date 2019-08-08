@@ -91,7 +91,7 @@ test('custom bit string token',()=>{
 
 test('get single string token with comment',()=>{
   const input = `{
-      "resource": "song", // 日推|私人FM
+      "resource": "song", // 日推|私人FM,歌曲id，如123
     }`
   let lexer = new Lexer(input);
   let token = lexer.getNextToken();
@@ -103,13 +103,11 @@ test('get single string token with comment',()=>{
   expect(token.type).toBe(':');
   token = lexer.getNextToken();
   expect(token.value).toBe(`"song"`);
-  debugger;
   token = lexer.getNextToken();
   expect(token.value).toBe(",");
   token = lexer.getNextToken();
-  debugger;
   expect(token.type).toBe(TokenType.SingleLineComment);
-  expect(token.value).toBe("日推|私人FM");
+  expect(token.value).toBe("日推|私人FM,歌曲id，如123");
   token = lexer.getNextToken();
   expect(token.type).toBe('}');
 

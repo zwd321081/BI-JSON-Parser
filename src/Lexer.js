@@ -51,8 +51,8 @@ class Lexer {
     return re.test(char);
   }
 
-  isChineseLetter(char) {
-    const re = /[\u4e00-\u9fa5_a-zA-Z0-9|]+/;
+  isNewLine(char) {
+    const re = /\r?\n/;
     return re.test(char);
   }
 
@@ -117,17 +117,13 @@ class Lexer {
 
     let buffer = "";
 
-    //skip the empty space.
-    while (this.isSpace(this.currentChar)) {
-      this.consume();
-    }
-
-    while (this.isChineseLetter(this.currentChar) && !this.isEnd()) {
+    while (!this.isNewLine(this.currentChar) && !this.isEnd()) {
       buffer += this.currentChar;
       this.consume();
     }
 
     if (buffer) {
+      buffer = buffer.trim();
       return new Token(TokenType.SingleLineComment, buffer);
     }
   }
