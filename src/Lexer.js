@@ -57,7 +57,6 @@ class Lexer {
   }
 
   getStringToken() {
-    debugger;
     let buffer = "";
     this.match(TokenType.QUOTE);
     while (this.currentChar != TokenType.QUOTE && !this.isEnd()) {
