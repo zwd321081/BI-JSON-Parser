@@ -13,14 +13,18 @@ test(" parser normal",()=>{
     expect(parser.isClear).toBe(true);
 })
 
-// test(" a comma at the end sentence ",()=>{
-//   const input = `{
-//       "resource": "song",
-//     }`
-//     debugger;
+test(" a comma at the end sentence ",()=>{
+  const input = `{
+      "resource": "song",
+    }`
+    debugger;
     
-//   let lexer = new Lexer(input);
-//   let parser = new Parser(lexer);
-//   parser.paseJSON();
-//   expect(parser.isClear).toBe(false);
-// })
+  let lexer = new Lexer(input);
+  let parser = new Parser(lexer);
+  try{
+    parser.paseJSON();
+  }catch(err){
+    expect(parser.isClear).toBe(false);
+  }
+  
+})

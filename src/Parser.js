@@ -52,12 +52,17 @@ export default class Parser {
     if (this.currentToken.type == tokenType) {
       this.currentToken = this.lexer.getNextToken();
     } else {
-      console.error(
+      //   console.error(
+      //     `this.currentToken is ${JSON.stringify(
+      //       this.currentToken
+      //     )} doesn't match the input ${tokenType}`
+      //   );
+      this.isClear = false;
+      throw new Error(
         `this.currentToken is ${JSON.stringify(
           this.currentToken
         )} doesn't match the input ${tokenType}`
       );
-      this.isClear = false;
     }
   }
 
