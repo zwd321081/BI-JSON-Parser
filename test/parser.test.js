@@ -6,7 +6,6 @@ test(" parser normal",()=>{
     const input = `{
         "resource": "song"
       }`
-      debugger;
     let lexer = new Lexer(input);
     let parser = new Parser(lexer);
     parser.paseJSON();
@@ -17,7 +16,6 @@ test(" a comma at the end sentence ",()=>{
   const input = `{
       "resource": "song",
     }`
-    debugger;
     
   let lexer = new Lexer(input);
   let parser = new Parser(lexer);
@@ -27,4 +25,15 @@ test(" a comma at the end sentence ",()=>{
     expect(parser.isClear).toBe(false);
   }
   
+})
+
+test(" parser normal with comment",()=>{
+  const input = `{
+      "resource": "song" //isRequired
+    }`
+    debugger;
+  let lexer = new Lexer(input);
+  let parser = new Parser(lexer);
+  parser.paseJSON();
+  expect(parser.isClear).toBe(true);
 })

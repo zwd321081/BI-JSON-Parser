@@ -32,8 +32,7 @@ export default class Parser {
     this.eat(TokenType.StringLiteral);
     this.eat(TokenType.COLON);
     this.parseValue();
-    if (this.currentToken.type == TokenType.COMMA) {
-      this.eat(TokenType.COMMA);
+    if (this.currentToken.type == TokenType.SingleLineComment) {
       this.eat(TokenType.SingleLineComment);
     }
   }
