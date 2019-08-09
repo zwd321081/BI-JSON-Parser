@@ -9,7 +9,7 @@ test(" parser normal",()=>{
     let lexer = new Lexer(input);
     let parser = new Parser(lexer);
     parser.paseJSON();
-    expect(parser.isClear).toBe(true);
+    expect(parser.isParseValidate).toBe(true);
 })
 
 test(" a comma at the end sentence ",()=>{
@@ -22,7 +22,7 @@ test(" a comma at the end sentence ",()=>{
   try{
     parser.paseJSON();
   }catch(err){
-    expect(parser.isClear).toBe(false);
+    expect(parser.isParseValidate).toBe(false);
   }
   
 })
@@ -34,7 +34,7 @@ test(" parser normal with comment",()=>{
   let lexer = new Lexer(input);
   let parser = new Parser(lexer);
   parser.paseJSON();
-  expect(parser.isClear).toBe(true);
+  expect(parser.isParseValidate).toBe(true);
 })
 
 test(" parser normal with bitstring",()=>{
@@ -44,7 +44,7 @@ test(" parser normal with bitstring",()=>{
   let lexer = new Lexer(input);
   let parser = new Parser(lexer);
   parser.paseJSON();
-  expect(parser.isClear).toBe(true);
+  expect(parser.isParseValidate).toBe(true);
 })
 
 test(" parser normal with bitstring and one more vertical line",()=>{
@@ -58,7 +58,7 @@ test(" parser normal with bitstring and one more vertical line",()=>{
     try{
       parser.paseJSON();
     }catch(err){
-      expect(parser.isClear).toBe(false);
+      expect(parser.isParseValidate).toBe(false);
     }
 
 })

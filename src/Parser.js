@@ -4,7 +4,7 @@ export default class Parser {
   constructor(lexer) {
     this.lexer = lexer;
     this.currentToken = lexer.getNextToken();
-    this.isClear = true; //flag to make sure pass the parser test
+    this.isParseValidate = true; //flag to make sure pass the parser test
   }
   /**
      json
@@ -56,7 +56,7 @@ export default class Parser {
       //       this.currentToken
       //     )} doesn't match the input ${tokenType}`
       //   );
-      this.isClear = false;
+      this.isParseValidate = false;
       throw new Error(
         `this.currentToken is ${JSON.stringify(
           this.currentToken
