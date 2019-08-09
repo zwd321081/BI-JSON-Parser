@@ -14,6 +14,7 @@ test('get single string token',()=>{
     const input = `{
         "resource": "song"
       }`
+      debugger;
     let lexer = new Lexer(input);
     let token = lexer.getNextToken();
     expect(token.type).toBe('{');
@@ -77,6 +78,7 @@ test('custom bit string token',()=>{
   const input = `{
       "page": "dailysongrecommend|userfm"
     }`
+    debugger;
   let lexer = new Lexer(input);
   let token = lexer.getNextToken();
   expect(token.type).toBe(`{`);

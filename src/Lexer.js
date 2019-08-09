@@ -57,27 +57,26 @@ class Lexer {
   }
 
   getStringToken() {
+    debugger;
     let buffer = "";
     this.match(TokenType.QUOTE);
-    while (
-      this.isLetter(this.currentChar) ||
-      this.currentChar == TokenType.BitOr
-    ) {
-      buffer += this.currentChar;
+    while (this.currentChar != TokenType.QUOTE && !this.isEnd()) {
+      if (this.currentChar == TokenType.BitOr) {
+        if (buffer)
+          this.tokens.push(
+            new Token(TokenType.StringLiteral, '"' + buffer + '"')
+          );
+        this.tokens.push(new Token(TokenType.BitOr, TokenType.BitOr));
+        buffer = "";
+      } else {
+        buffer += this.currentChar;
+      }
       this.consume();
     }
     if (buffer) {
-      let bitStrings = buffer.split(TokenType.BitOr);
-      let bitNumber = bitStrings.length - 1;
-      bitStrings.forEach((item, index) => {
-        let finalStr = '"' + item + '"';
-        this.tokens.push(new Token(TokenType.StringLiteral, finalStr));
-        if (index < bitNumber) {
-          this.tokens.push(new Token(TokenType.BitOr, TokenType.BitOr));
-        }
-      });
-      this.match(TokenType.QUOTE);
+      this.tokens.push(new Token(TokenType.StringLiteral, '"' + buffer + '"'));
     }
+    this.match(TokenType.QUOTE);
   }
 
   isNumber(char) {
