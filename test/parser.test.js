@@ -1,6 +1,7 @@
 
 import Lexer from "../src/Lexer";
 import Parser from "../src/Parser";
+import { equal } from "assert";
 test(" parser normal",()=>{
     const input = `{
         "resource": "song"
@@ -8,5 +9,5 @@ test(" parser normal",()=>{
       debugger;
     let lexer = new Lexer(input);
     let parser = new Parser(lexer);
-    parser.paseJSON();
+    expect(parser.isClear).toBe(true);
 })

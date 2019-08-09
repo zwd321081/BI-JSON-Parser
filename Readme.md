@@ -16,7 +16,7 @@ json
 
 
 value
-    : BITSTRING
+    : STRING(|STRING)*
     | NUMBER
     | obj
     | 'true'
@@ -30,8 +30,7 @@ obj
 pair
     String: value(,comment)?
 
-BITSTRING
-    : String(|String)*
+
 
 
 ```

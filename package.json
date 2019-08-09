@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:debug": "babel-node --inspect-brk node_modules/.bin/jest --runInBand"
+    "test": "jest --verbose",
+    "test:debug": "babel-node --inspect-brk node_modules/.bin/jest --verbose --runInBand"
   },
   "jest": {
     "testEnvironment": "node",

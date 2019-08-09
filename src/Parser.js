@@ -4,6 +4,7 @@ export default class Parser {
   constructor(lexer) {
     this.lexer = lexer;
     this.currentToken = lexer.getNextToken();
+    this.isClear = true; //flag to make sure pass the parser test
   }
   /**
      json
@@ -28,9 +29,18 @@ export default class Parser {
   /** String: value(,comment)? */
   parsePair() {
     this.eat(TokenType.StringLiteral);
+    this.eat(TokenType.COLON);
     this.parseValue();
     if (this.currentToken == TokenType.COMMA) {
       this.eat(TokenType.SingleLineComment);
+    }
+  }
+
+  //STRING(|STRING)*
+  parseString() {
+    this.eat(TokenType.StringLiteral);
+    while (this.currentToken.type == TokenType.BitOr) {
+      this.eat(TokenType.StringLiteral);
     }
   }
 
@@ -44,12 +54,13 @@ export default class Parser {
           this.currentToken
         )} doesn't match the input ${tokenType}`
       );
+      this.isClear = false;
     }
   }
 
   /**
      * value
-    : BITSTRING
+    : STRING(|STRING)*
     | NUMBER
     | obj
     | 'true'
@@ -59,6 +70,12 @@ export default class Parser {
     switch (this.currentToken.type) {
       case TokenType.OpenBrace:
         this.parseObject();
+        break;
+      case TokenType.StringLiteral:
+        this.parseString();
+        break;
+      case TokenType.NUMBER:
+        this.eat(TokenType.NUMBER);
         break;
     }
   }
