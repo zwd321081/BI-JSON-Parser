@@ -9,5 +9,18 @@ test(" parser normal",()=>{
       debugger;
     let lexer = new Lexer(input);
     let parser = new Parser(lexer);
+    parser.paseJSON();
     expect(parser.isClear).toBe(true);
 })
+
+// test(" a comma at the end sentence ",()=>{
+//   const input = `{
+//       "resource": "song",
+//     }`
+//     debugger;
+    
+//   let lexer = new Lexer(input);
+//   let parser = new Parser(lexer);
+//   parser.paseJSON();
+//   expect(parser.isClear).toBe(false);
+// })

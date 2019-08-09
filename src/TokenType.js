@@ -21,7 +21,8 @@ const TokenType = {
   SingleLineComment: "//",
   NUMBER: "NUMBER",
   COMMA: ",",
-  EOFILE: "EOFILE" //end of file
+  EOFILE: "EOFILE", //end of file character;
+  EOF: "EOF" //end token
 };
 
 const KeyWords = {

@@ -27,6 +27,8 @@ test('get single string token',()=>{
     expect(token.type).toBe('StringLiteral');
     token = lexer.getNextToken();
     expect(token.type).toBe('}');
+    token = lexer.getNextToken();
+    expect(token.type).toBe(TokenType.EOF);
 })
 
 test('get single number token',()=>{
@@ -46,6 +48,8 @@ test('get single number token',()=>{
   expect(token.value).toBe('111');
   token = lexer.getNextToken();
   expect(token.type).toBe('}');
+  token = lexer.getNextToken();
+  expect(token.type).toBe(TokenType.EOF);
 })
 
 test('get single boolean token',()=>{
@@ -65,6 +69,8 @@ test('get single boolean token',()=>{
   expect(token.value).toBe('true');
   token = lexer.getNextToken();
   expect(token.type).toBe('}');
+  token = lexer.getNextToken();
+  expect(token.type).toBe(TokenType.EOF);
 })
 
 test('custom bit string token',()=>{
@@ -87,6 +93,10 @@ test('custom bit string token',()=>{
   token = lexer.getNextToken();
   expect(token.value).toBe(`"userfm"`);
   expect(token.type).toBe('StringLiteral');
+  token = lexer.getNextToken();
+  expect(token.type).toBe('}');
+  token = lexer.getNextToken();
+  expect(token.type).toBe(TokenType.EOF);
 })
 
 test('get single string token with comment',()=>{
@@ -110,6 +120,8 @@ test('get single string token with comment',()=>{
   expect(token.value).toBe("日推|私人FM,歌曲id，如123");
   token = lexer.getNextToken();
   expect(token.type).toBe('}');
+  token = lexer.getNextToken();
+  expect(token.type).toBe(TokenType.EOF);
 
 })
 

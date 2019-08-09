@@ -166,13 +166,17 @@ class Lexer {
       }
       if (token) this.tokens.push(token);
     }
+
+    this.tokens.push(new Token(TokenType.EOF, TokenType.EOF));
   }
 
   getNextToken() {
     if (this.tokenIndex <= this.tokens.length - 1) {
       return this.tokens[this.tokenIndex++];
     } else {
-      console.error(`no token left`);
+      console.error(
+        `current index is ${this.tokenIndex} and the input length is ${this.tokens.length}`
+      );
     }
   }
 }

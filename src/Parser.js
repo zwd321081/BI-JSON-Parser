@@ -21,6 +21,7 @@ export default class Parser {
     this.eat(TokenType.OpenBrace);
     this.parsePair();
     while (this.currentToken.type == TokenType.COMMA) {
+      this.eat(TokenType.COMMA);
       this.parsePair();
     }
     this.eat(TokenType.CloseBrace);
@@ -31,7 +32,8 @@ export default class Parser {
     this.eat(TokenType.StringLiteral);
     this.eat(TokenType.COLON);
     this.parseValue();
-    if (this.currentToken == TokenType.COMMA) {
+    if (this.currentToken.type == TokenType.COMMA) {
+      this.eat(TokenType.COMMA);
       this.eat(TokenType.SingleLineComment);
     }
   }
@@ -40,6 +42,7 @@ export default class Parser {
   parseString() {
     this.eat(TokenType.StringLiteral);
     while (this.currentToken.type == TokenType.BitOr) {
+      this.eat(TokenType.BitOr);
       this.eat(TokenType.StringLiteral);
     }
   }
