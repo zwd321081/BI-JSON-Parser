@@ -1,7 +1,6 @@
-import TokenType from "./TokenType";
-import { thisTypeAnnotation } from "@babel/types";
+import { TokenType } from "./TokenType";
 
-class Parser {
+export default class Parser {
   constructor(lexer) {
     this.lexer = lexer;
     this.currentToken = lexer.getNextToken();
@@ -41,7 +40,9 @@ class Parser {
       this.currentToken = this.lexer.getNextToken();
     } else {
       console.error(
-        `this.currentToken is ${this.currentToken} doesn't match the input ${tokenType}`
+        `this.currentToken is ${JSON.stringify(
+          this.currentToken
+        )} doesn't match the input ${tokenType}`
       );
     }
   }
@@ -55,9 +56,7 @@ class Parser {
     | 'false'
     ; */
   parseValue() {
-    const currentToken = this.lexer.getNextToken();
-
-    switch (currentToken.type) {
+    switch (this.currentToken.type) {
       case TokenType.OpenBrace:
         this.parseObject();
         break;
