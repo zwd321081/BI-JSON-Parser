@@ -3,6 +3,7 @@ import { TokenType } from "./TokenType";
 export default class Parser {
   constructor(lexer) {
     this.lexer = lexer;
+    this.sym = {}; //暂时记录comment的一些信息，类似global symbol.
     this.currentToken = lexer.getNextToken();
     this.isParseValidate = true; //flag to make sure pass the parser test
   }
@@ -29,10 +30,12 @@ export default class Parser {
 
   /** String: value(,comment)? */
   parsePair() {
+    const _key = this.currentToken.value;
     this.eat(TokenType.StringLiteral);
     this.eat(TokenType.COLON);
     this.parseValue();
     if (this.currentToken.type == TokenType.SingleLineComment) {
+      this.sym[_key] = this.currentToken.value;
       this.eat(TokenType.SingleLineComment);
     }
   }
@@ -85,5 +88,9 @@ export default class Parser {
         this.eat(TokenType.NUMBER);
         break;
     }
+  }
+
+  getComment(key) {
+    return this.sym[`"${key}"`];
   }
 }

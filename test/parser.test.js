@@ -62,3 +62,20 @@ test(" parser normal with bitstring and one more vertical line",()=>{
     }
 
 })
+
+test(" comment with isRequired",()=>{
+  const input = `{
+      "resource": "song|album" //isRequired
+    }`
+
+      debugger;
+    let lexer = new Lexer(input);
+    let parser = new Parser(lexer);
+    parser.paseJSON();
+    expect(parser.isParseValidate).toBe(true);
+    let _comment = parser.getComment("resource")
+
+    expect(_comment).toBe("isRequired")
+
+})
+
