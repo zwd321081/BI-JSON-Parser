@@ -65,7 +65,7 @@ test('get single boolean token',()=>{
   token = lexer.getNextToken();
   expect(token.type).toBe(':');
   token = lexer.getNextToken();
-  expect(token.type).toBe('true');
+  expect(token.type).toBe(TokenType.BOOLEAN);
   expect(token.value).toBe('true');
   token = lexer.getNextToken();
   expect(token.type).toBe('}');

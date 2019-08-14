@@ -22,12 +22,14 @@ const TokenType = {
   NUMBER: "NUMBER",
   COMMA: ",",
   EOFILE: "EOFILE", //end of file character;
-  EOF: "EOF" //end token
+  EOF: "EOF", //end token
+  BOOLEAN: "BOOLEAN",
+  IDENTIFIER: "IDENTIFIER"
 };
 
 const KeyWords = {
-  true: "true",
-  false: "false"
+  true: TokenType.BOOLEAN,
+  false: TokenType.BOOLEAN
 };
 
 export { TokenType, KeyWords };

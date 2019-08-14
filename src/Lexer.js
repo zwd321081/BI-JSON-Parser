@@ -93,15 +93,16 @@ class Lexer {
       return new Token(TokenType.NUMBER, buffer);
     }
   }
-  getKeyWordToken() {
+  getIdentifierToken() {
     let buffer = "";
     while (this.isLetter(this.currentChar)) {
       buffer += this.currentChar;
       this.consume();
     }
-    let isKeyWord = KeyWords[buffer];
-    if (isKeyWord) {
-      return new Token(isKeyWord, isKeyWord);
+
+    if (buffer) {
+      let _tokenType = KeyWords[buffer];
+      return new Token(_tokenType || TokenType.IDENTIFIER, buffer);
     } else {
       console.error(`${buffer} is not an valid token`);
     }
@@ -157,7 +158,7 @@ class Lexer {
           if (this.isNumber(this.currentChar)) {
             token = this.getNumberToken();
           } else if (this.isLetter(this.currentChar)) {
-            token = this.getKeyWordToken();
+            token = this.getIdentifierToken();
           } else {
             console.error(`${this.currentChar} is not a valid type`);
           }
