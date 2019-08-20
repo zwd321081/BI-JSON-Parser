@@ -6,6 +6,7 @@ const AstNodeTypes = {
   PAIR: "pair",
   STRING: "string",
   NUMBER: "number",
+  PROPERTY: "property",
   BOOLEAN: "boolean"
 };
 
@@ -50,6 +51,17 @@ class JsonKey extends JsonNode {
   }
 }
 
+/**
+ * pair里面的value
+ */
+class JsonValue extends JsonNode {
+  constructor() {
+    super(AstNodeTypes.PROPERTY);
+    this.child = [];
+    this.comment = null;
+  }
+}
+
 class JsonString extends JsonNode {
   constructor(value) {
     super(AstNodeTypes.STRING);
@@ -76,6 +88,7 @@ export {
   JsonObject,
   JsonPair,
   JsonKey,
+  JsonValue,
   JsonString,
   JsonNumber,
   JsonBoolean

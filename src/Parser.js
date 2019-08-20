@@ -56,11 +56,15 @@ export default class Parser {
 
   //STRING(|STRING)*
   parseString() {
+    let arr = [];
+    arr.push(new AstNode.JsonString(this.currentToken.value));
     this.eat(TokenType.StringLiteral);
     while (this.currentToken.type == TokenType.BitOr) {
       this.eat(TokenType.BitOr);
+      arr.push(new AstNode.JsonString(this.currentToken.value));
       this.eat(TokenType.StringLiteral);
     }
+    return arr;
   }
 
   /**match the current token and get the next */
@@ -91,19 +95,26 @@ export default class Parser {
     | 'false'
     ; */
   parseValue() {
+    let _valueObj = new AstNode.JsonValue();
+    const _current = this.currentToken;
     switch (this.currentToken.type) {
       case TokenType.OpenBrace:
-        return this.parseObject();
+        _valueObj.child.push(this.parseObject());
         break;
       case TokenType.StringLiteral:
-        return this.parseString();
+        _valueObj.child.push(this.parseString());
         break;
       case TokenType.NUMBER:
-        const _current = this.currentToken;
         this.eat(TokenType.NUMBER);
-        return new AstNode.JsonNumber(_current.value);
+        _valueObj.child.push(new AstNode.JsonNumber(_current.value));
+        break;
+      case TokenType.SingleLineComment:
+        this.eat(TokenType.SingleLineComment);
+        _valueObj.comment = new AstNode.JsonComment(_current.value);
         break;
     }
+
+    return _valueObj;
   }
 
   getComment(key) {
