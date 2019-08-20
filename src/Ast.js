@@ -7,6 +7,7 @@ const AstNodeTypes = {
   STRING: "string",
   NUMBER: "number",
   PROPERTY: "property",
+  COMMENT: "comment",
   BOOLEAN: "boolean"
 };
 
@@ -83,6 +84,13 @@ class JsonBoolean extends JsonNode {
   }
 }
 
+class JsonComment extends JsonNode {
+  constructor(value) {
+    super(AstNodeTypes.COMMENT);
+    this.value = value;
+  }
+}
+
 export {
   JsonDocument,
   JsonObject,
@@ -91,5 +99,6 @@ export {
   JsonValue,
   JsonString,
   JsonNumber,
+  JsonComment,
   JsonBoolean
 };

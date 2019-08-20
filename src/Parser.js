@@ -5,7 +5,7 @@ import { objectExpression } from "@babel/types";
 export default class Parser {
   constructor(lexer) {
     this.lexer = lexer;
-    this.sym = {}; //暂时记录comment的一些信息，类似global symbol.
+    // this.sym = {}; //暂时记录comment的一些信息，类似global symbol.
     this.currentToken = lexer.getNextToken();
     this.isParseValidate = true; //flag to make sure pass the parser test
   }
@@ -14,10 +14,7 @@ export default class Parser {
     : value
     ; */
   paseJSON() {
-    debugger;
-    let doc = new AstNode.JsonDocument();
-    doc.child = this.parseValue();
-    return doc;
+    return this.parseValue();
   }
 
   /**obj 
@@ -47,7 +44,8 @@ export default class Parser {
     this.eat(TokenType.COLON);
     let _value = this.parseValue();
     if (this.currentToken.type == TokenType.SingleLineComment) {
-      this.sym[_key] = this.currentToken.value;
+      // this.sym[_key] = this.currentToken.value;
+      _value.comment = new AstNode.JsonComment(this.currentToken.value);
       this.eat(TokenType.SingleLineComment);
     }
     _pair.value = _value;
@@ -108,16 +106,16 @@ export default class Parser {
         this.eat(TokenType.NUMBER);
         _valueObj.child.push(new AstNode.JsonNumber(_current.value));
         break;
-      case TokenType.SingleLineComment:
-        this.eat(TokenType.SingleLineComment);
-        _valueObj.comment = new AstNode.JsonComment(_current.value);
-        break;
+      // case TokenType.SingleLineComment:
+      //   this.eat(TokenType.SingleLineComment);
+      //   _valueObj.comment = new AstNode.JsonComment(_current.value);
+      //   break;
     }
 
     return _valueObj;
   }
 
-  getComment(key) {
-    return this.sym[`"${key}"`];
-  }
+  // getComment(key) {
+  //   return this.sym[`"${key}"`];
+  // }
 }
