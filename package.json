@@ -8,6 +8,7 @@
     "test:debug": "babel-node --inspect-brk node_modules/.bin/jest --verbose --runInBand"
   },
   "jest": {
+    "collectCoverage":true,
     "testEnvironment": "node",
     "roots": [
       "test"
