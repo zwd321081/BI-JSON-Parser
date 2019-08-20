@@ -62,9 +62,7 @@ class Lexer {
     while (this.currentChar != TokenType.QUOTE && !this.isEnd()) {
       if (this.currentChar == TokenType.BitOr) {
         if (buffer)
-          this.tokens.push(
-            new Token(TokenType.StringLiteral, '"' + buffer + '"')
-          );
+          this.tokens.push(new Token(TokenType.StringLiteral, buffer));
         this.tokens.push(new Token(TokenType.BitOr, TokenType.BitOr));
         buffer = "";
       } else {
@@ -73,7 +71,7 @@ class Lexer {
       this.consume();
     }
     if (buffer) {
-      this.tokens.push(new Token(TokenType.StringLiteral, '"' + buffer + '"'));
+      this.tokens.push(new Token(TokenType.StringLiteral, buffer));
     }
     this.match(TokenType.QUOTE);
   }
