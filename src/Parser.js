@@ -97,14 +97,14 @@ export default class Parser {
     const _current = this.currentToken;
     switch (this.currentToken.type) {
       case TokenType.OpenBrace:
-        _valueObj.child.push(this.parseObject());
+        _valueObj.children.push(this.parseObject());
         break;
       case TokenType.StringLiteral:
-        _valueObj.child.push(this.parseString());
+        _valueObj.children = _valueObj.children.concat(this.parseString());
         break;
       case TokenType.NUMBER:
         this.eat(TokenType.NUMBER);
-        _valueObj.child.push(new AstNode.JsonNumber(_current.value));
+        _valueObj.children.push(new AstNode.JsonNumber(_current.value));
         break;
       // case TokenType.SingleLineComment:
       //   this.eat(TokenType.SingleLineComment);

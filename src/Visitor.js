@@ -20,35 +20,37 @@ export default class Visitor {
 
   visitNode(jsonNode) {}
 
-  //   visit(node) {
-  //     switch (node.type) {
-  //       case AstNodeTypes.DOCUMENT:
-  //         this.visitDocument(node);
-  //         break;
-  //       case AstNodeTypes.OBJECT:
-  //         this.visitObjet(node);
-  //         break;
-  //       case AstNodeTypes.PAIR:
-  //         this.visitPair(node);
-  //         break;
-  //       case AstNodeTypes.Key:
-  //         this.visitKey(node);
-  //         break;
-  //       case AstNodeTypes.STRING:
-  //         this.visitString(node);
-  //         break;
-  //       case AstNodeTypes.Number:
-  //         this.visitNumber(node);
-  //         break;
-  //       case AstNodeTypes.VALUE:
-  //         this.visitValue(node);
-  //         break;
-  //       case AstNodeTypes.COMMENT:
-  //         this.visitComment(node);
-  //         break;
-  //       case AstNodeTypes.BOOLEAN:
-  //         this.visitBoolean(node);
-  //         break;
-  //     }
-  //   }
+  visitComment(jsonComment) {}
+
+  visit(node) {
+    switch (node.type) {
+      case AstNodeTypes.DOCUMENT:
+        this.visitDocument(node);
+        break;
+      case AstNodeTypes.OBJECT:
+        this.visitObject(node);
+        break;
+      case AstNodeTypes.PAIR:
+        this.visitPair(node);
+        break;
+      case AstNodeTypes.Key:
+        this.visitKey(node);
+        break;
+      case AstNodeTypes.STRING:
+        this.visitString(node);
+        break;
+      case AstNodeTypes.Number:
+        this.visitNumber(node);
+        break;
+      case AstNodeTypes.VALUE:
+        this.visitValue(node);
+        break;
+      case AstNodeTypes.COMMENT:
+        this.visitComment(node);
+        break;
+      case AstNodeTypes.BOOLEAN:
+        this.visitBoolean(node);
+        break;
+    }
+  }
 }

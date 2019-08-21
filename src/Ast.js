@@ -6,7 +6,7 @@ const AstNodeTypes = {
   PAIR: "pair",
   STRING: "string",
   NUMBER: "number",
-  PROPERTY: "property",
+  // PROPERTY: "property",
   COMMENT: "comment",
   BOOLEAN: "boolean"
 };
@@ -26,7 +26,7 @@ class JsonNode {
 class JsonDocument extends JsonNode {
   constructor() {
     super(AstNodeTypes.DOCUMENT);
-    this.child = null;
+    this.children = null;
   }
 
   accept(visitor) {
@@ -73,8 +73,8 @@ class JsonKey extends JsonNode {
  */
 class JsonValue extends JsonNode {
   constructor() {
-    super(AstNodeTypes.PROPERTY);
-    this.child = [];
+    super(AstNodeTypes.VALUE);
+    this.children = [];
     this.comment = null;
   }
 
