@@ -19,7 +19,7 @@ class JsonNode {
 
   /**采用visitor模式 */
   accept(visitor) {
-    visitor.visit(this);
+    visitor.visitNode(this);
   }
 }
 
@@ -28,12 +28,20 @@ class JsonDocument extends JsonNode {
     super(AstNodeTypes.DOCUMENT);
     this.child = null;
   }
+
+  accept(visitor) {
+    visitor.visitDocument(this);
+  }
 }
 
 class JsonObject extends JsonNode {
   constructor() {
     super(AstNodeTypes.OBJECT);
     this.pairs = [];
+  }
+
+  accept(visitor) {
+    visitor.visitObject(this);
   }
 }
 
@@ -43,12 +51,20 @@ class JsonPair extends JsonNode {
     this.key = key;
     this.value = value;
   }
+
+  accept(visitor) {
+    visitor.visitPair(this);
+  }
 }
 
 class JsonKey extends JsonNode {
   constructor(value) {
     super(AstNodeTypes.KEY);
     this.value = value;
+  }
+
+  accept(visitor) {
+    visitor.visitKey(this);
   }
 }
 
@@ -61,12 +77,20 @@ class JsonValue extends JsonNode {
     this.child = [];
     this.comment = null;
   }
+
+  accept(visitor) {
+    visitor.visitValue(this);
+  }
 }
 
 class JsonString extends JsonNode {
   constructor(value) {
     super(AstNodeTypes.STRING);
     this.value = value;
+  }
+
+  accept(visitor) {
+    visitor.visitString(this);
   }
 }
 
@@ -75,6 +99,9 @@ class JsonNumber extends JsonNode {
     super(AstNodeTypes.NUMBER);
     this.value = value;
   }
+  accept(visitor) {
+    visitor.visitNumber(this);
+  }
 }
 
 class JsonBoolean extends JsonNode {
@@ -82,12 +109,19 @@ class JsonBoolean extends JsonNode {
     super(AstNodeTypes.BOOLEAN);
     this.value = value;
   }
+  accept(visitor) {
+    visitor.visitBoolean(this);
+  }
 }
 
 class JsonComment extends JsonNode {
   constructor(value) {
     super(AstNodeTypes.COMMENT);
     this.value = value;
+  }
+
+  accept(visitor) {
+    visitor.visitComment(this);
   }
 }
 
