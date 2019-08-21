@@ -100,5 +100,6 @@ export {
   JsonString,
   JsonNumber,
   JsonComment,
+  AstNodeTypes,
   JsonBoolean
 };
