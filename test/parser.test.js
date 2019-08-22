@@ -1,8 +1,8 @@
 
 import Lexer from "../src/Lexer";
 import Parser from "../src/Parser";
-// import * as AstNode from "../src/Ast"
 import { equal } from "assert";
+import { Interpreter } from "../src/Interpter";
 test(" parser normal",()=>{
     const input = `{
         "resource": "song"
@@ -85,15 +85,32 @@ test(" comment with isRequired AstNode",()=>{
       "resource": "song|album" //isRequired
     }`
 
-    debugger;
 
+   
     let lexer = new Lexer(input);
     let parser = new Parser(lexer);
     let jaonValue = parser.paseJSON();
 
-    expect(jaonValue.child[0].type).toBe("object");
-    expect(jaonValue.child[0].pairs.length).toBe(1);
-    expect(jaonValue.child[0].pairs[0].value.comment.type).toBe("comment")
-    expect(jaonValue.child[0].pairs[0].value.comment.value).toBe("isRequired");
+    expect(jaonValue.children[0].type).toBe("object");
+    expect(jaonValue.children[0].pairs.length).toBe(1);
+   
+})
+
+test(" interpter test",()=>{
+  const input = `{
+      "resource": "song|album", //isRequired
+      "resourceid":true //songid,123
+    }`
+
+    let lexer = new Lexer(input);
+    let parser = new Parser(lexer);
+    let astTree = parser.paseJSON();
+
+    let interpter  = new Interpreter();
+
+    interpter.visitValue(astTree);
+
+ 
+  
 })
 

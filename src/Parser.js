@@ -5,7 +5,6 @@ import { objectExpression } from "@babel/types";
 export default class Parser {
   constructor(lexer) {
     this.lexer = lexer;
-    // this.sym = {}; //暂时记录comment的一些信息，类似global symbol.
     this.currentToken = lexer.getNextToken();
     this.isParseValidate = true; //flag to make sure pass the parser test
   }
@@ -27,14 +26,14 @@ export default class Parser {
     _pairs.push(this.parsePair());
     while (this.currentToken.type == TokenType.COMMA) {
       this.eat(TokenType.COMMA);
-      _pairs(this.parsePair());
+      _pairs.push(this.parsePair());
     }
     this.eat(TokenType.CloseBrace);
     _obj.pairs = _pairs;
     return _obj;
   }
 
-  /** String: value(,comment)? */
+  /** String: value */
   parsePair() {
     let _pair = new AstNode.JsonPair();
     const _key = this.currentToken.value;
@@ -43,11 +42,6 @@ export default class Parser {
     this.eat(TokenType.StringLiteral);
     this.eat(TokenType.COLON);
     let _value = this.parseValue();
-    if (this.currentToken.type == TokenType.SingleLineComment) {
-      // this.sym[_key] = this.currentToken.value;
-      _value.comment = new AstNode.JsonComment(this.currentToken.value);
-      this.eat(TokenType.SingleLineComment);
-    }
     _pair.value = _value;
     return _pair;
   }
@@ -63,6 +57,10 @@ export default class Parser {
       this.eat(TokenType.StringLiteral);
     }
     return arr;
+  }
+
+  peek(index) {
+    return this.lexer.peek(index);
   }
 
   /**match the current token and get the next */
@@ -106,16 +104,12 @@ export default class Parser {
         this.eat(TokenType.NUMBER);
         _valueObj.children.push(new AstNode.JsonNumber(_current.value));
         break;
-      // case TokenType.SingleLineComment:
-      //   this.eat(TokenType.SingleLineComment);
-      //   _valueObj.comment = new AstNode.JsonComment(_current.value);
-      //   break;
+      case TokenType.BOOLEAN:
+        this.eat(TokenType.BOOLEAN);
+        _valueObj.children.push(new AstNode.JsonBoolean(_current.value));
+        break;
     }
 
     return _valueObj;
   }
-
-  // getComment(key) {
-  //   return this.sym[`"${key}"`];
-  // }
 }

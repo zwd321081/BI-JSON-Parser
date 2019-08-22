@@ -7,7 +7,7 @@ class Lexer {
     this.pos = 0;
     this.currentChar = this.input[this.pos];
     this.tokens = [];
-    this.tokenIndex = 0; //为了取得下一个token用
+    this.currentTokenIndex = 0; //为了取得下一个token用
     this.lex();
   }
   /**获取下一个字符 */
@@ -111,17 +111,10 @@ class Lexer {
     this.match(TokenType.SingleSlash);
     this.match(TokenType.SingleSlash);
 
-    let buffer = "";
-
     while (!this.isNewLine(this.currentChar) && !this.isEnd()) {
-      buffer += this.currentChar;
       this.consume();
     }
-
-    if (buffer) {
-      buffer = buffer.trim();
-      return new Token(TokenType.SingleLineComment, buffer);
-    }
+    return;
   }
 
   //获取所有的token;
@@ -168,11 +161,11 @@ class Lexer {
   }
 
   getNextToken() {
-    if (this.tokenIndex <= this.tokens.length - 1) {
-      return this.tokens[this.tokenIndex++];
+    if (this.currentTokenIndex <= this.tokens.length - 1) {
+      return this.tokens[this.currentTokenIndex++];
     } else {
       console.error(
-        `current index is ${this.tokenIndex} and the input length is ${this.tokens.length}`
+        `current index is ${this.currentTokenIndex} and the input length is ${this.tokens.length}`
       );
     }
   }
