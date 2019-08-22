@@ -22,7 +22,9 @@ export default class Visitor {
 
   visitComment(jsonComment) {}
 
-  visit(node) {
+  visitArray(jsonArray) {}
+
+  visit(node, jsonKey) {
     switch (node.type) {
       case AstNodeTypes.DOCUMENT:
         this.visitDocument(node);
@@ -43,13 +45,16 @@ export default class Visitor {
         this.visitNumber(node);
         break;
       case AstNodeTypes.VALUE:
-        this.visitValue(node);
+        this.visitValue(node, jsonKey);
         break;
       case AstNodeTypes.COMMENT:
         this.visitComment(node);
         break;
       case AstNodeTypes.BOOLEAN:
         this.visitBoolean(node);
+        break;
+      case AstNodeTypes.ARRAY:
+        this.visitArray(node, jsonKey);
         break;
     }
   }

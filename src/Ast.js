@@ -8,7 +8,8 @@ const AstNodeTypes = {
   NUMBER: "number",
   // PROPERTY: "property",
   COMMENT: "comment",
-  BOOLEAN: "boolean"
+  BOOLEAN: "boolean",
+  ARRAY: "array"
 };
 
 /**所有的初始节点 */

@@ -26,7 +26,7 @@ export class Interpreter extends Visitor {
 
   visitPair(pair) {
     pair.key.accept(this);
-    pair.value.accept(this);
+    pair.value.accept(this, pair.key);
   }
 
   visitKey(jsonKey) {
@@ -34,13 +34,13 @@ export class Interpreter extends Visitor {
     this.currentKey = jsonKey.value;
   }
 
+  visitArrary(node, jsonKey) {}
+
   visitComment(jsonComment) {
     this.env.define(this.currentKey, jsonComment.value);
   }
 
-  visitString(jsonString) {
-    console.log(jsonString);
-  }
+  visitString(jsonString) {}
 
   getComment(key) {
     return this.env.resolve(key);
