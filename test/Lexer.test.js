@@ -1,12 +1,4 @@
-//   const input = `{
-//       "page": "dailysongrecommend|userfm", // 日推|私人FM
-//       "resource": "song", // 歌曲
-//       "resourceid": true, // 歌曲id，如123
-//       "target": 111, // 不感兴趣
-//       "targetid": "button", // 点击按钮
-//       "reason": "", // 不感兴趣理由，如推荐重复
-//       "reason_type": "fixed" // 不感兴趣理由类型，固定
-//     }`
+
 
 import Lexer from "../src/Lexer"
 import { TokenType } from "../src/TokenType";
@@ -116,9 +108,7 @@ test('get single string token with comment',()=>{
   expect(token.value).toBe("song");
   token = lexer.getNextToken();
   expect(token.value).toBe(",");
-  // token = lexer.getNextToken();
-  // expect(token.type).toBe(TokenType.SingleLineComment);
-  // expect(token.value).toBe("日推|私人FM,歌曲id，如123");
+
   token = lexer.getNextToken();
   expect(token.type).toBe('}');
   token = lexer.getNextToken();
