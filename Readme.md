@@ -28,7 +28,7 @@ obj
     ;
 
 pair
-    String: value(,comment)?
+    String: value
 
 
 
