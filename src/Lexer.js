@@ -3,10 +3,10 @@ import Token from "./Token";
 
 class Lexer {
   constructor(input) {
-    this.input = input;
-    this.pos = 0;
-    this.currentChar = this.input[this.pos];
-    this.tokens = [];
+    this.input = input; //输入的source
+    this.pos = 0; //当前字符位置
+    this.currentChar = this.input[this.pos]; //当前字符
+    this.tokens = []; //最终的token list
     this.currentTokenIndex = 0; //为了取得下一个token用
     this.lex();
   }
@@ -19,6 +19,7 @@ class Lexer {
       this.currentChar = TokenType.EOFILE;
     }
   }
+  //判断是否读完
   isEnd() {
     return this.pos > this.input.length - 1;
   }
@@ -59,7 +60,11 @@ class Lexer {
   getStringToken() {
     let buffer = "";
     this.match(TokenType.QUOTE);
-    while (this.currentChar != TokenType.QUOTE && !this.isEnd()) {
+    while (
+      this.currentChar != TokenType.QUOTE &&
+      !this.isEnd() &&
+      (this.isLetter(this.currentChar) || this.currentChar == TokenType.BitOr)
+    ) {
       if (this.currentChar == TokenType.BitOr) {
         if (buffer)
           this.tokens.push(new Token(TokenType.StringLiteral, buffer));
@@ -83,7 +88,7 @@ class Lexer {
 
   getNumberToken() {
     let buffer = "";
-    while (this.isNumber(this.currentChar)) {
+    while (this.isNumber(this.currentChar) && !this.isEnd()) {
       buffer += this.currentChar;
       this.consume();
     }
