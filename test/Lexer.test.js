@@ -46,7 +46,7 @@ test('get single number token',()=>{
 
 test('get single boolean token',()=>{
   const input = `{
-      "resourceid": true
+      "resourceid": false
     }`
   let lexer = new Lexer(input);
   let token = lexer.getNextToken();
@@ -57,8 +57,8 @@ test('get single boolean token',()=>{
   token = lexer.getNextToken();
   expect(token.type).toBe(':');
   token = lexer.getNextToken();
-  expect(token.type).toBe(TokenType.BOOLEAN);
-  expect(token.value).toBe('true');
+  expect(token.type).toBe(TokenType.FALSE);
+  expect(token.value).toBe('false');
   token = lexer.getNextToken();
   expect(token.type).toBe('}');
   token = lexer.getNextToken();

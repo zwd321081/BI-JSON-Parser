@@ -109,8 +109,12 @@ export default class Parser {
       case TokenType.NUMBER:
         _valueObj.children.push(this.parseNumber());
         break;
-      case TokenType.BOOLEAN:
-        this.eat(TokenType.BOOLEAN);
+      case TokenType.TRUE:
+        this.eat(TokenType.TRUE);
+        _valueObj.children.push(new AstNode.JsonBoolean(_current.value));
+        break;
+      case TokenType.FALSE:
+        this.eat(TokenType.FALSE);
         _valueObj.children.push(new AstNode.JsonBoolean(_current.value));
         break;
     }
