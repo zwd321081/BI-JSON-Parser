@@ -10,6 +10,8 @@
 1. https://github.com/antlr/grammars-v4/blob/master/json/JSON.g4
 
 ```
+grammar JSON;
+
 json
     : value
     ;
@@ -29,6 +31,14 @@ obj
 
 pair
     String: value
+
+STRING
+   : '"' (ESC | SAFECODEPOINT)* '"'
+   ;
+
+NUMBER
+   : '-'? INT ('.' [0-9] +)? EXP?
+   ;
 
 
 

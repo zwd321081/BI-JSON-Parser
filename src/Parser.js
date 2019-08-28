@@ -59,6 +59,12 @@ export default class Parser {
     return arr;
   }
 
+  parseNumber() {
+    const _value = this.currentToken.value;
+    this.eat(TokenType.NUMBER);
+    return new AstNode.JsonNumber(_value);
+  }
+
   peek(index) {
     return this.lexer.peek(index);
   }
@@ -101,8 +107,7 @@ export default class Parser {
         _valueObj.children = _valueObj.children.concat(this.parseString());
         break;
       case TokenType.NUMBER:
-        this.eat(TokenType.NUMBER);
-        _valueObj.children.push(new AstNode.JsonNumber(_current.value));
+        _valueObj.children.push(this.parseNumber());
         break;
       case TokenType.BOOLEAN:
         this.eat(TokenType.BOOLEAN);
