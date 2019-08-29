@@ -76,7 +76,6 @@ class JsonValue extends JsonNode {
   constructor() {
     super(AstNodeTypes.VALUE);
     this.children = [];
-    this.comment = null;
   }
 
   accept(visitor) {
