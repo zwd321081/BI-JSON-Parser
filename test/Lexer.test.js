@@ -31,7 +31,7 @@ test('value 为汉字 throw error',()=>{
       "resource": "活动url"
    }`
     new Lexer(input);
-  }).toThrow();
+  }).toThrow(Error);
 })
 
 test('get single number token',()=>{

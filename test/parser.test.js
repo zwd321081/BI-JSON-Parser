@@ -82,11 +82,18 @@ test(" comment with isRequired",()=>{
 test(" two bitor throw error",()=>{
 
   expect(()=>{
-
+    const input = `{
+      "resource": "song||album" //isRequired
+    }`
     let lexer = new Lexer(input);
     let parser = new Parser(lexer);
     parser.paseJSON();
-  }).toThrow()
+  }).toThrow(Error)
+ 
+
+    // let _comment = parser.getComment("resource")
+
+    // expect(_comment).toBe("isRequired")
 
 })
 
