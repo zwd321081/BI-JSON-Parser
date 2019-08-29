@@ -23,6 +23,17 @@ test('get single string token',()=>{
     expect(token.type).toBe(TokenType.EOF);
 })
 
+test('value 为汉字',()=>{
+
+
+  expect(()=>{
+    const input = `{
+      "resource": "活动url"
+   }`
+    new Lexer(input);
+  }).toThrow();
+})
+
 test('get single number token',()=>{
   const input = `{
       "target": 111

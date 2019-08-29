@@ -29,7 +29,7 @@ class Lexer {
     if (this.currentChar == inputchar) {
       this.consume();
     } else {
-      console.error(`${inputchar} is not matched`);
+      throw new Error(`${inputchar} is not matched ${this.currentChar}`);
     }
   }
 
@@ -156,7 +156,7 @@ class Lexer {
           } else if (this.isLetter(this.currentChar)) {
             token = this.getIdentifierToken();
           } else {
-            console.error(`${this.currentChar} is not a valid type`);
+            throw new Error(`${this.currentChar} is not a valid type`);
           }
       }
       if (token) this.tokens.push(token);
