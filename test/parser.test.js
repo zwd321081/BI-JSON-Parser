@@ -79,6 +79,17 @@ test(" comment with isRequired",()=>{
 
 })
 
+test(" two bitor throw error",()=>{
+
+  expect(()=>{
+
+    let lexer = new Lexer(input);
+    let parser = new Parser(lexer);
+    parser.paseJSON();
+  }).toThrow()
+
+})
+
 
 test(" comment with isRequired AstNode",()=>{
   const input = `{

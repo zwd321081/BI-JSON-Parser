@@ -23,7 +23,7 @@ test('get single string token',()=>{
     expect(token.type).toBe(TokenType.EOF);
 })
 
-test('value 为汉字',()=>{
+test('value 为汉字 throw error',()=>{
 
 
   expect(()=>{
